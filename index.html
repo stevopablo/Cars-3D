@@ -13,7 +13,7 @@
         }
         body {
             background-color: #4A4A4A;
-            font-family: Arial, sans-serif;
+            font-family: 'montserrat', sans-serif;
         }
         header {
             background-color: #2C2C2C;
@@ -69,9 +69,11 @@
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
+       
         .sketchfab-embed-wrapper {
             width: 60%;
             margin: 0 0 0 20px;
+            text-align: center;
         }
         h2 {
             font-size: 16px;
@@ -106,7 +108,7 @@
     </div>
 
     <div class="sketchfab-embed-wrapper">
-        <iframe id="carIframe" style="height: 600px; width: 700px;" title="3d model Supercar" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" src=""></iframe>
+        <iframe id="carIframe" style="height: 700px; width: 900px;" title="3d model Supercar" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" src=""></iframe>
     </div>
     
 </div>
@@ -126,7 +128,17 @@
             motor: 'Motor: V8 biturbo, 3982 cm³ (243.0 cu-in)',
             description: 'O Mercedes-AMG GT 63 é um carro de luxo e alto desempenho com um motor V8 biturbo. Ele combina conforto e tecnologia avançada com potência bruta e desempenho dinâmico.',
             moreInfo: 'Preço: $162,000. Velocidade máxima: 315 km/h (196 mph). Aceleração 0-100 km/h em 3,3 segundos.'
+        },
+        {
+            model: "Laferri",
+            url: "https://sketchfab.com/models/979f7085012e4d6399f38de3f9c39012/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_theme=dark",
+            motor: "Motor: V12, 6262 cm³ (382.3 cu-in)",
+            description: "O Laferri é um supercarro de altíssimo desempenho com um motor V12. Ele é projetado para fornecer a máxima potência e velocidade com um design aerodinâmico e tecnologia de ponta.",
+            moreInfo: "Preço: $1,420,000. Velocidade máxima: 350 km/h (217 mph). Aceleração 0-100 km/h em 2,6 segundos."
         }
+
+            
+        
     ];
 
     const select = document.getElementById('carSelect');
