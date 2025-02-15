@@ -4,49 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        p {
-            font-size: 13px;
-            font-weight: normal;
-            margin: 5px;
-            color: #bb0505;
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
         }
         body {
             background-color: #4A4A4A;
+            font-family: Arial, sans-serif;
         }
-        a {
-            font-weight: bold;
+        header {
+            background-color: #2C2C2C;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+        }
+        header h1 {
+            margin: 0;
+        }
+        header nav a {
             color: #1CAAD9;
+            margin-right: 20px;
+            text-decoration: none;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+        select {
+            margin: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .toggleButton {
+            width: 40px;
+            height: 40px;
+            background-color: #2C2C2C;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .car-info {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            margin: 20px;
+            background-color: #c0b9b9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        .car-info.hidden {
+            display: none;
+        }
+        .box-1, .box-2, .box-3 {
+            background-color: #ffffff;
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .sketchfab-embed-wrapper {
+            width: 60%;
+            margin: 0 0 0 20px;
+        }
+        h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <select  name="carSelect" id="carSelect"></select>
+<header>
+    <h1>Car Showcase</h1>
+    <nav>
+        <a href="#carSelect">Select Car</a>
+        <a href="#info-2">Description</a>
+        <a href="#info-3">More Info</a>
+    </nav>
+</header>
 
-    <div style="display: flex; justify-content: space-between;">
+<select title="selectCar" name="carSelect" id="carSelect"></select>
 
-        <div class="box-1" id="motor-info"></div>
-        <div class="box-2"></div>
-        <div class="box-3"></div>
-
-        <div class="sketchfab-embed-wrapper">
-            <iframe id="carIframe" style="height: 500px; width: 500px;" title="3d model Supercar" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" src=""></iframe>
-        </div>
-        
+<div style="display: flex; justify-content: space-between; height: 100%;">
+    <button id="toggleButton">                
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="car-info">
+        <div class="box-1" id="motor-info">Motor</div>
+        <div class="box-2" id="info-2">Description</div>
+        <div class="box-3" id="info-3">More Info</div>
     </div>
-</body>
+
+    <div class="sketchfab-embed-wrapper">
+        <iframe id="carIframe" style="height: 600px; width: 700px;" title="3d model Supercar" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" src=""></iframe>
+    </div>
+    
+</div>
 
 <script>
     const cars = [
         {
             model: 'porsche_gt3_rs',
             url: "https://sketchfab.com/models/bf6aaaad5093428da6713db916045963/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_theme=dark",
-            motor: 'Motor: Boxer de 6 cilindros, 3996 cm³ (243.9 cu-in)'
+            motor: 'Motor: Boxer de 6 cilindros, 3996 cm³ (243.9 cu-in)',
+            description: 'O Porsche 911 GT3 RS é um carro esportivo de alto desempenho com um motor boxer de 6 cilindros. Ele possui uma aerodinâmica avançada e componentes leves para maximizar a velocidade e o manuseio.',
+            moreInfo: 'Preço: $150,000. Velocidade máxima: 318 km/h (198 mph). Aceleração 0-100 km/h em 3,2 segundos.'
         },
         {
             model: 'mercedes_amg_gt_63',
-            url: "https://sketchfab.com/3d-models/mercedes-amg-gt-63-572e320f4e054f919d316afb2676d292?utm_medium=embed&utm_campaign=share-popup&utm_content=572e320f4e054f919d316afb2676d292"
+            url: "https://sketchfab.com/models/572e320f4e054f919d316afb2676d292/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_theme=dark",
+            motor: 'Motor: V8 biturbo, 3982 cm³ (243.0 cu-in)',
+            description: 'O Mercedes-AMG GT 63 é um carro de luxo e alto desempenho com um motor V8 biturbo. Ele combina conforto e tecnologia avançada com potência bruta e desempenho dinâmico.',
+            moreInfo: 'Preço: $162,000. Velocidade máxima: 315 km/h (196 mph). Aceleração 0-100 km/h em 3,3 segundos.'
         }
     ];
 
@@ -57,22 +136,43 @@
         option.text = car.model.toUpperCase().replace(/_/g, " ");
         select.appendChild(option);
     });
-    
-    
-    
+
+    const box1 = document.getElementById('motor-info');
+    const box2 = document.getElementById('info-2');
+    const box3 = document.getElementById('info-3');
+    const carInfo = document.querySelector('.car-info');
+    const toggleButton = document.getElementById('toggleButton');
+
     select.addEventListener('change', function() {
         const selectCar = select.value;
         const carIframe = document.getElementById('carIframe');
         const car = cars.find(car => car.model === selectCar);
         if (car) {
+            console.log('Car selected:', car);
             carIframe.src = car.url;
-            const box1 = document.getElementById('motor-info')
-            const h2 = document.createElement('h2')
-            h2.innerHTML = car.motor
-            box1.appendChild(h2)
+
+            const motorInfo = document.createElement('h2');
+            motorInfo.innerHTML = car.motor;
+            box1.innerHTML = ''; 
+            box1.appendChild(motorInfo);
+
+            const description = document.createElement('p');
+            description.innerHTML = car.description;
+            box2.innerHTML = ''; 
+            box2.appendChild(description);
+
+            const moreInfo = document.createElement('p');
+            moreInfo.innerHTML = car.moreInfo;
+            box3.innerHTML = ''; 
+            box3.appendChild(moreInfo);
         } else {
             console.error('Modelo de carro não encontrado!');
         }
+    });
+
+    toggleButton.addEventListener('click', function() {
+        carInfo.classList.toggle('hidden');
+        // toggleButton.innerHTML = carInfo.classList.contains('hidden') ? '<' : '>';
     });
 
     select.value = cars[0].model;
